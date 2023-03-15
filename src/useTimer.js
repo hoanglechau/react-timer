@@ -1,8 +1,9 @@
 import { useState, useRef } from 'react';
 
 // eslint-disable-next-line no-unused-vars
-const useTimer = (initial = 0) => {
-  const [time, setTime] = useState(0);
+const useTimer = (initialState = 0) => {
+  // can pass different initial values to this custom hook
+  const [time, setTime] = useState(initialState);
   const isStart = useRef(true);
   const active = useRef();
   const refInterval = useRef(0);
@@ -12,9 +13,8 @@ const useTimer = (initial = 0) => {
     isStart.current = true;
     refInterval.current = setInterval(() => {
       if (isStart.current) {
-        // The argument passed into setTime must be 'time' for the timer to work
         // eslint-disable-next-line no-shadow
-        setTime((time) => time + 1);
+        setTime((prevTime) => prevTime + 1);
       }
     }, 1000);
   };
